@@ -41,5 +41,5 @@ bool loadbalancer::isRequestQueueEmpty()
 
 int loadbalancer::getSize()
 {
-  
+  return requestQueue.size();
 } 

@@ -33,6 +33,7 @@ int main()
 
    // create a loadbalancer
    loadbalancer lb;
+
    
    // start off with a "full" queue
    for (int i = 0; i < 10; i++)
@@ -45,7 +46,7 @@ int main()
    webserver webarray[NUM_SERVERS];
    for (int i = 0; i < NUM_SERVERS; i++)
    {
-      webserver w((char) (i + 65));
+      webserver w( (char) (i + 65));
       webarray[i] = w;
       webarray[i].addRequest(lb.getRequest(), lb.getTime());
 
@@ -53,8 +54,11 @@ int main()
    // loop
    while (lb.getTime() < 10000)
    {
+      //cout << "testing" << endl;
       int currTime = lb.getTime();
+      //cout << "testing" << endl;
       int size = lb.getSize();
+
       // check each webserver if it's done
       if(webarray[currTime % NUM_SERVERS].isRequestDone(currTime))
       {
@@ -67,7 +71,7 @@ int main()
          cout << endl;
 		 
          // then give it a new request
-         webarray[currTime % NUM_SERVERS].addRequest(lb.getRequest(), currTime());
+         webarray[currTime % NUM_SERVERS].addRequest(lb.getRequest(), currTime);
       }
       // every random set of time, or get a new request
       if (rand() % 10 == 0)
@@ -76,11 +80,6 @@ int main()
          lb.addRequest(r);
       }
       lb.incTime();
-
-
-
-      
-
    }
 
 }
